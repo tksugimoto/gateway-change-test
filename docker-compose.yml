@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  http-server:
+    build:
+      context: ./http-server/
+    ports:
+      - "${HTTP_SERVER_BIND_IP_PORT:-127.0.0.1:80}:80"
+    restart: always
+    cap_add:
+      - NET_ADMIN
+
+  client:
+    build:
+      context: ./client/
+    cap_add:
+      - NET_ADMIN
