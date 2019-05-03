@@ -13,5 +13,7 @@ services:
   client:
     build:
       context: ./client/
+    depends_on:
+      - http-server
     cap_add:
       - NET_ADMIN
