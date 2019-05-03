@@ -1,9 +1,7 @@
-FROM alpine:3.9
+FROM node:10-alpine
 
 # dig コマンド
 RUN apk --update --no-cache add bind-tools
-
-RUN apk --update --no-cache add nodejs
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["node", "/opt/http-server/index.js"]
