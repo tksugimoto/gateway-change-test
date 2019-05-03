@@ -1,15 +1,11 @@
-FROM centos:7.6.1810
-
-# route コマンド
-RUN yum -y install net-tools
+FROM node:10-alpine
 
 # dig コマンド
-RUN yum -y install bind-utils
+RUN apk --update --no-cache add bind-tools
 
-RUN yum -y install epel-release && \
-    yum -y install nodejs --enablerepo=epel
+RUN apk --update add --no-cache tini
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "docker-entrypoint.sh"]
 CMD ["node", "/opt/http-server/index.js"]
 
 COPY ./index.js /opt/http-server/
